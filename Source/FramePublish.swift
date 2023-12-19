@@ -200,7 +200,9 @@ extension FramePublish: InitialWithBytes {
 
         }else{
             // MQTT 3.1.1
-            topic = NSString(bytes: [UInt8](bytes[2...(pos-1)]), length: Int(len), encoding: String.Encoding.utf8.rawValue)! as String
+            if let fetchedTopic = NSString(bytes: [UInt8](bytes[2...(pos-1)]), length: Int(len), encoding: String.Encoding.utf8.rawValue) {
+                topic = fetchedTopic as String
+            }
         }
 
         // payload
